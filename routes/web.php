@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/environment-whitelist', function (Request $request) {
+    echo 'Your IP (' . $request->ip() . ') isn\'t whitelisted to access this environment';
+})->name('environment-whitelist');
+
+
+Route::group(['middleware' => 'whitelist'], function () {
+    
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
 });
