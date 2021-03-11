@@ -1,11 +1,13 @@
 <?php
 
+namespace App\Http\Controllers\Utils\IpAddresses;
+
 use App\Http\Controllers\Controller;
-use Symfony\Component\HttpFoundation\IpUtils;
 
-class TestController extends Controller {
+class ClientRemoteIpAddress extends Controller {
 
-    public function getIp(){
+    public static function getIp():string
+    {
         foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
             if (array_key_exists($key, $_SERVER) === true){
                 foreach (explode(',', $_SERVER[$key]) as $ip){
@@ -16,6 +18,7 @@ class TestController extends Controller {
                 }
             }
         }
+
         return request()->ip(); // it will return server ip when no client ip found
     }
 
