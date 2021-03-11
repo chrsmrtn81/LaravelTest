@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Views\Errors\EnvironmentWhitelist;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/environment-whitelist', function (Request $request) {
-    echo 'Your IP (' . $request->ip() . ') isn\'t whitelisted to access this environment';
-})->name('environment-whitelist');
+Route::get('/environment-whitelist', [EnvironmentWhitelist::class, 'errorPage'])->name('environment-whitelist');
 
 
 Route::group(['middleware' => 'whitelist'], function () {
