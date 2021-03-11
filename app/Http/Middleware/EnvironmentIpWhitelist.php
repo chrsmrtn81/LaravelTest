@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\Utils\IpAddresses\ClientRemoteIpAddress;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -16,18 +17,20 @@ class EnvironmentIpWhitelist
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!$this->checkExistsInWhitelist($request)){
+        $remoteIp = ClientRemoteIpAddress::getIp();
+
+        if(!$this->checkExistsInWhitelist($remoteIp)){
             return redirect('environment-whitelist');
         }
         
         return $next($request);
     }
 
-    private function checkExistsInWhitelist(Request $request)
+    private function checkExistsInWhitelist($remoteIp)
     {
         $ips = explode(',', env('ENVIRONMENT_IP_WHITELIST'));
 
-        if(in_array($request->ip(), $ips) || $ips[0] === 'all'){
+        if(in_array($remoteIp, $ips) || $ips[0] === 'all'){
             return true;
         }
 
