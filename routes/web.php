@@ -20,7 +20,7 @@ Route::get('/environment-whitelist', [EnvironmentWhitelist::class, 'errorPage'])
 Route::group(['middleware' => 'whitelist'], function () {
     
     Route::get('/', function () {
-        return view('welcome');
+        return view('index');
     });
 
 });
