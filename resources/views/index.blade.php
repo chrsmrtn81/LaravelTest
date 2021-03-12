@@ -11,7 +11,7 @@
 
     <style>
         @font-face {
-            font-family: Helvetica;
+            font-family: 'Helvetica';
             src: url(https://res.cloudinary.com/chrsmrtn81/raw/upload/v1615582707/Chris%20Martin/Helvetica_nprwdq.ttf);
         }
 
@@ -32,7 +32,7 @@
 <body style="margin: 0;">
 
     <div class="bg position-relative h-100">
-        <div class="container-fluid position-absolute" style="bottom: 20px">
+        <div class="container-fluid position-absolute" style="bottom: 16px">
             <div class="row">
                 <div class="col-2 bg-dark d-flex p-3">
                     <img class="m-auto" src="{{ asset("/images/cm-monogram.svg") }}" style="height: 100px;" />
