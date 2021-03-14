@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://res.cloudinary.com/chrsmrtn81/image/upload/c_scale,h_120/v1615670923/Chris%20Martin/cm-monogram_yqo4en.svg" sizes="16x16" type="image/svg">
     <title>Chris Martin</title>
 
     {{-- CSS --}}
