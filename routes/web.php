@@ -24,6 +24,4 @@ Route::group(['middleware' => 'whitelist'], function () {
     
     Route::get('/', [HomePage::class, 'view']);
 
-    Route::get('/redis', [Cache::class, 'redis']);
-
 });
