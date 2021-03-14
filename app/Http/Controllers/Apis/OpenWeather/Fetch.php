@@ -31,7 +31,7 @@ class Fetch extends Controller {
     public function multipleLocations()
     {
         $response = Http::get($this->url . 'group?', [
-            'id'=> '1609350,2636389,2642607,1607551,2655664,2643743',
+            'id'=> '1609350,2636389,2642607,1607551,2655664',
             'units' => 'metric',
             'appid' => env('OPENWEATHER_API_KEY'),
         ]);
