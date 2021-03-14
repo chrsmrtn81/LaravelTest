@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 class EnvironmentWhitelist extends Controller {
 
-    public function errorPage()
+    public function view()
     {
         return view('errors.environment-whitelist', [
             'remoteIp' => ClientRemoteIpAddress::getIp(),

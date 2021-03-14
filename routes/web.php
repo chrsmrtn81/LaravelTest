@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\Views\Errors\EnvironmentWhitelist;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Apis\OpenWeather\Cache;
+use App\Http\Controllers\Apis\OpenWeather\Fetch;
+use App\Http\Controllers\Views\Errors\EnvironmentWhitelist;
+use App\Http\Controllers\Views\Pages\HomePage;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/environment-whitelist', [EnvironmentWhitelist::class, 'errorPage'])->name('environment-whitelist');
+Route::get('/environment-whitelist', [EnvironmentWhitelist::class, 'view'])->name('environment-whitelist');
 
 
 Route::group(['middleware' => 'whitelist'], function () {
     
-    Route::get('/', function () {
-        return view('index');
-    });
+    Route::get('/', [HomePage::class, 'view']);
+
+    Route::get('/redis', [Cache::class, 'redis']);
 
 });
