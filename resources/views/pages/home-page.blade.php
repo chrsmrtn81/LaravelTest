@@ -18,7 +18,7 @@
     <style>
         @font-face {
             font-family: 'Helvetica';
-            src: url('{{ asset('/fonts/Helvetica.ttf') }}') format('ttf');
+            src: url({{ asset('/fonts/Helvetica.ttf') }});
         }
 
         body, html {
