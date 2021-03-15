@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html 
-    lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-    Cache-Control: public, max-age=31536000
->
+
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Cache-control" content="public" max-age='31536000'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="https://res.cloudinary.com/chrsmrtn81/image/upload/c_scale,h_120/v1615670923/Chris%20Martin/cm-monogram_yqo4en.svg" sizes="any" type="image/svg+xml">
     <title>Chris Martin</title>
