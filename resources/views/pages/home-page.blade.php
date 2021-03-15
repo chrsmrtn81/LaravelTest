@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html 
     lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-    Cache-Control: max-age=31536000
+    Cache-Control: public, max-age=31536000
 >
 
 <head>
