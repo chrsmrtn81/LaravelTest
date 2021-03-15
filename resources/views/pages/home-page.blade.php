@@ -18,7 +18,7 @@
     <style>
         @font-face {
             font-family: 'Helvetica';
-            src: url(https://res.cloudinary.com/chrsmrtn81/raw/upload/v1615582707/Chris%20Martin/Helvetica_nprwdq.ttf);
+            src: url('{{ asset('/fonts/Helvetica.ttf') }}') format('ttf');
         }
 
         body, html {
