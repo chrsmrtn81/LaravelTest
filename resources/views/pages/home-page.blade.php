@@ -39,7 +39,7 @@
         <div class="container-fluid position-absolute" style="bottom: 16px">
             <div class="row">
                 <div class="col-2 bg-dark d-flex p-3">
-                    <img class="m-auto" src="https://res.cloudinary.com/chrsmrtn81/image/upload/c_scale,h_120/v1615670923/Chris%20Martin/cm-monogram_yqo4en.svg" style="height: 100px;" />
+                    <img class="m-auto" src="https://res.cloudinary.com/chrsmrtn81/image/upload/c_scale,h_120/v1615670923/Chris%20Martin/cm-monogram_yqo4en.svg" style="height: 100px; max-width: 100%" />
                 </div>
                 <div class="col-10 text-white d-flex justify-content-end" style="background: rgba(52,58,64, 0.6);">
                     <div class="my-auto text-right">
