@@ -4,7 +4,6 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Http\Controllers\Apis\OpenWeather\Cache as OpenWeatherCache;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(new OpenWeatherCache)->everyMinute();
+        // $schedule->command('inspire')->hourly();
     }
 
     /**

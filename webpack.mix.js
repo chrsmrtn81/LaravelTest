@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+ 
 
 /*
  |--------------------------------------------------------------------------
@@ -11,7 +12,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix
+    .js('resources/js/app.js', 'public/js')
+    .vue()
+    .css('node_modules/bootstrap-icons/font/bootstrap-icons.css', 'public/css/app.css')
+    .sass('resources/scss/app.scss', 'public/css')

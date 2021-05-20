@@ -1,0 +1,36 @@
+.sidebar {
+    position: fixed;
+    width: inherit;
+    background-color: $light;
+
+    &__filter {
+        ul {
+            list-style: none;
+        }
+    }
+}
+
+.accordion {
+
+    &-button {
+        @include fontSize(13px);
+        color: $gray-500;
+        background-color: $light;
+
+        &:not(.collapsed){
+            box-shadow: none;
+            color: $gray-500;
+            background-color: $light;
+        }
+    
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    &-item {
+        border: none;
+        @include fontSize(13px);
+        background-color: $light;
+    }
+}

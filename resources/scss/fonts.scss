@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "Helvetica";
+    src: url("../fonts/Helvetica.ttf");
+}
+
+@font-face {
+    font-family: "Helvetica-Bold";
+    src: url("../fonts/Helvetica-Bold.ttf");
+}
+
+@mixin fontSize($size) {
+    font-size: $size; //Fallback in px
+    font-size: calculateRem($size);
+}
+
+body,
+html {
+    height: 100%;
+    font-family: "Helvetica";
+    letter-spacing: -0.03rem;
+    line-height: 1.25em;
+    color: $gray-900;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.bold {
+    font-family: "Helvetica-Bold";
+    letter-spacing: -0.03rem;
+    line-height: 1.25em;
+}
+
+a {
+    font-family: "Helvetica-Bold";
+    color: $gray-900;
+    text-decoration: none;
+
+    &:hover {
+        color: $gray-900;
+    }
+}
