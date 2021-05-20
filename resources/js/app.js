@@ -15,7 +15,7 @@ window.Vue = require('vue').default;
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('sidebar-filters', require('./components/SidebarFilters.vue').default);
-Vue.component('article-list-large', require('./components/ExampleComponent.vue').default);
+Vue.component('article-list-large', require('./components/ArticleListLarge.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

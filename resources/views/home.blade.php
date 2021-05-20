@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body>
@@ -49,7 +49,13 @@
                                         <i class="bi bi-book"></i>&nbsp; ALL NEWS
                                     </button>
                                 </h2>
-                                <sidebar-filters></sidebar-filters>
+
+
+
+                                <sidebar-filters :source-filters="{{ $sources }}"></sidebar-filters>
+
+
+
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="panelsStayOpen-headingThree">
@@ -74,7 +80,8 @@
                     @include('partials.nav.navbar')
                     <div class="px-5">
                         <h1 class="my-5">Most Recent</h1>
-                        <ul>
+                        <article-list-large :articles="{{ $articles }}"></article-list-large>
+                        {{-- <ul>
                             @foreach ($articles as $k => $v)
                                 <li class="article-card__animated" style="--animation-order: {{ $k }};">
                                     <div class="row mb-4 py-3 article-card">
@@ -95,7 +102,7 @@
                                     </div>
                                 </li>
                             @endforeach
-                        </ul>
+                        </ul> --}}
                     </div>
                 </div>
             </div>
