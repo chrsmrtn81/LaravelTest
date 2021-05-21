@@ -13,7 +13,7 @@
                     <a class="m-0">{{ item.title }}</a
                     ><br />
                     <div class="article-card__info-meta">
-                        {{ item.source_name }} /
+                        {{ item.source_name }} / {{ item.pub_date }}
                     </div>
                     <div class="article-card__info-meta">
                         {{ item.short_description }}
