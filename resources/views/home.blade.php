@@ -72,8 +72,8 @@
 
                 <div class="col-9 p-0">
                     @include('partials.nav.navbar')
-                    <div class="px-5">
-                        <h1 class="my-5">Most Recent</h1>
+                    <div class="px-5 pt-5">
+                        <h1 class="mb-5 pt-5">Most Recent</h1>
                         <ul>
                             @foreach ($articles as $k => $v)
                                 <li class="article-card__animated" style="--animation-order: {{ $k }};">
