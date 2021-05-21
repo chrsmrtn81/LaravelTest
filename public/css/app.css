@@ -10935,6 +10935,11 @@ a:hover {
     font-size: 18px;
   }
 }
+.cc_navbar {
+  z-index: 1030;
+  width: inherit;
+}
+
 .article-card {
   border: 1px solid #fff;
   transition: all 0.2s ease-in;
