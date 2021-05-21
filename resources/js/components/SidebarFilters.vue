@@ -29,45 +29,51 @@ import axios from "axios";
 export default {
     name: "app",
     created() {
-        this.fetchData();
+        //this.fetchData();
+    },
+    props: {
+        sourceFilters: {
+            type: Array,
+            required: true
+        }
     },
     data() {
         return {
-            sourceFilters: []
+            //sourceFilters: []
         };
     },
     methods: {
-        fetchData() {
-            axios.post("/ajax").then(
-                response => {
-                    let selectedSourceFilters = JSON.parse(
-                        localStorage.getItem("selectedSourceFilters")
-                    );
+        // fetchData() {
+        //     axios.post("/ajax").then(
+        //         response => {
+        //             let selectedSourceFilters = JSON.parse(
+        //                 localStorage.getItem("selectedSourceFilters")
+        //             );
 
-                    let i;
-                    for (i = 0; i < response.data.length; i++) {
-                        if (selectedSourceFilters) {
-                            if (
-                                selectedSourceFilters.includes(
-                                    response.data[i].id.toString()
-                                )
-                            ) {
-                                response.data[i].checked = true;
-                            } else {
-                                response.data[i].checked = false;
-                            }
-                        } else {
-                            response.data[i].checked = true;
-                        }
-                    }
+        //             let i;
+        //             for (i = 0; i < response.data.length; i++) {
+        //                 if (selectedSourceFilters) {
+        //                     if (
+        //                         selectedSourceFilters.includes(
+        //                             response.data[i].id.toString()
+        //                         )
+        //                     ) {
+        //                         response.data[i].checked = true;
+        //                     } else {
+        //                         response.data[i].checked = false;
+        //                     }
+        //                 } else {
+        //                     response.data[i].checked = true;
+        //                 }
+        //             }
 
-                    this.sourceFilters = response.data;
-                },
-                error => {
-                    console.log(error.response.data);
-                }
-            );
-        },
+        //             this.sourceFilters = response.data;
+        //         },
+        //         error => {
+        //             console.log(error.response.data);
+        //         }
+        //     );
+        // },
         toggleChecked(id) {
             let values = [];
             let checked = document.querySelectorAll(
@@ -82,6 +88,17 @@ export default {
             localStorage.setItem(
                 "selectedSourceFilters",
                 JSON.stringify(values)
+            );
+
+            axios.post("/updateCookies", {
+                "values": localStorage.getItem("selectedSourceFilters")
+            }).then(
+                response => {
+                    console.log(response.data);
+                },
+                error => {
+                    console.log(error.response.data);
+                }
             );
         }
     }
