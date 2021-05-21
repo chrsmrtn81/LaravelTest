@@ -31,7 +31,7 @@
         <div id="main" class="container-fluid">
             <div class="row">
 
-                <div class="col-3 bg-light vh-100 px-0">
+                <div class="col-2 bg-light vh-100 px-0">
                     <div class="sidebar vh-100 border-end border-1">
                         <div class="d-flex">
                             <a class="mx-auto" href="#">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
 
-                <div class="col-9 p-0">
+                <div class="col-10 p-0">
                     @include('partials.nav.navbar')
                     <div class="px-5 mt-5">
                         <h1 class="my-5 pt-5">Most Recent</h1>
