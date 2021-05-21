@@ -1,0 +1,61 @@
+$medium: #333;
+
+.sideNav {
+  height: 100%;
+  width: 320px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: -320px;
+  background-color: $dark;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+
+  li {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    color: $medium;
+    display: block;
+    transition: 0.3s;
+
+    &:hover {
+      color: $medium;
+    }
+
+    a {
+      text-decoration: none;
+      color: $medium;
+      transition: 0.3s;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  &__closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 36px;
+    color: $light;
+    cursor: pointer;
+  }
+}
+
+#main {
+  left: 0;
+  transition: left 0.5s;
+  position: relative;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sideNav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sideNav {
+    padding-top: 15px;
+  }
+  .sideNav li {
+    font-size: 18px;
+  }
+}

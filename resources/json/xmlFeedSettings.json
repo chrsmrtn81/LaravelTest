@@ -1,0 +1,14 @@
+[
+    {"file": "crowder", "url": "https://www.louderwithcrowder.com/feeds/feed.rss"},
+    {"file": "spiked", "url": "https://www.spiked-online.com/feed/"},
+    {"file": "babylon", "url": "https://babylonbee.com/feed"},
+    {"file": "summit", "url": "https://summit.news/feed/"},
+    {"file": "thepoint", "url": "https://thepointnews.uk/feed/"},
+    {"file": "theblaze", "url": "https://www.theblaze.com/feeds/feed.rss"},
+    {"file": "thefirst", "url": "https://www.thefirsttv.com/feed/"},
+    {"file": "thecritic", "url": "https://thecritic.co.uk/feed/"},
+    {"file": "conservativewoman", "url": "https://www.conservativewoman.co.uk/feed/"},
+    {"file": "ukcolumn", "url": "https://www.ukcolumn.org/index.php/rss.xml"},
+    {"file": "foxhole", "url": "https://foxhole.news/feed/"},
+    {"file": "americasvoice", "url": "https://americasvoice.news/feeds/rss.xml"}
+]

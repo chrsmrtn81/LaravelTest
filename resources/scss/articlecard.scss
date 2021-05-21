@@ -1,0 +1,48 @@
+.article-card {
+    border: 1px solid $white;
+    -moz-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+
+    &:hover {
+        background-color: $yellow-100;
+        border: 1px solid $yellow-200;
+        border-radius: 4px;
+    }
+
+    &__info {
+        &-meta {
+            color: $gray-600;
+            @include fontSize(13px);
+        }
+    }
+
+    &__img {
+        height: 100px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 4px;
+        border: 1px solid $gray-200;
+    }
+}
+
+li.article-card__animated {
+    list-style: none;
+    animation-name: animateIn;
+    animation-duration: 500ms;
+    animation-delay: calc(var(--animation-order) * 100ms);
+    animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes animateIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(-8px);
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
