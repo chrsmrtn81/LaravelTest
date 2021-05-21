@@ -1872,13 +1872,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ArticleListLarge",
+  data: function data() {
+    return {
+      mutableArticles: this.articles
+    };
+  },
   created: function created() {
     var _this = this;
 
     Event.$on('updatedArticles', function (updatedArticles) {
-      //console.log(updatedArticles)
       _this.mutableArticles = updatedArticles.updatedArticles;
     });
   },
@@ -1887,11 +1895,6 @@ __webpack_require__.r(__webpack_exports__);
       type: Array,
       required: true
     }
-  },
-  data: function data() {
-    return {
-      mutableArticles: this.articles
-    };
   }
 });
 
@@ -19786,7 +19789,11 @@ var render = function() {
             _c("div", { staticClass: "col-2" }, [
               _c("div", {
                 staticClass: "w-100 article-card__img",
-                style: { "background-image": "url(" + item.image + ")" }
+                style: [
+                  item.image
+                    ? { "background-image": "url(" + item.image + ")" }
+                    : { "background-image": "url(/img/no_image.png)" }
+                ]
               })
             ]),
             _vm._v(" "),
