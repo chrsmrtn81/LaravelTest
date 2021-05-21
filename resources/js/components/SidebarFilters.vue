@@ -27,7 +27,7 @@
 import axios from "axios";
 
 export default {
-    name: "app",
+    name: "SidebarFilters",
     created() {
         //this.fetchData();
     },
@@ -39,7 +39,7 @@ export default {
     },
     data() {
         return {
-            //sourceFilters: []
+            articles: []
         };
     },
     methods: {
@@ -75,32 +75,33 @@ export default {
         //     );
         // },
         toggleChecked(id) {
-            let values = [];
+            let ids = [];
             let checked = document.querySelectorAll(
                 "input[name=sourceNameFilter]:checked"
             );
 
             let i;
             for (i = 0; i < checked.length; i++) {
-                values.push(checked[i].value);
+                ids.push(checked[i].value)
             }
 
             localStorage.setItem(
                 "selectedSourceFilters",
-                JSON.stringify(values)
+                JSON.stringify(ids)
             );
 
             axios.post("/updateCookies", {
-                "values": localStorage.getItem("selectedSourceFilters")
+                "ids": localStorage.getItem("selectedSourceFilters")
             }).then(
                 response => {
-                    console.log(response.data);
+                    Event.$emit('updatedArticles', {'updatedArticles': response.data})
+                    console.log(response.data)
                 },
                 error => {
-                    console.log(error.response.data);
+                    console.log(error.response.data)
                 }
-            );
+            )
         }
     }
-};
+}
 </script>

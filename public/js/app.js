@@ -1872,10 +1872,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//import axios from "axios";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "app",
-  created: function created() {//this.fetchData()
+  name: "ArticleListLarge",
+  created: function created() {
+    var _this = this;
+
+    Event.$on('updatedArticles', function (updatedArticles) {
+      //console.log(updatedArticles)
+      _this.mutableArticles = updatedArticles.updatedArticles;
+    });
   },
   props: {
     articles: {
@@ -1884,7 +1889,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   data: function data() {
-    return {//sourceFilters: []
+    return {
+      mutableArticles: this.articles
     };
   }
 });
@@ -1966,7 +1972,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "app",
+  name: "SidebarFilters",
   created: function created() {//this.fetchData();
   },
   props: {
@@ -1976,7 +1982,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   data: function data() {
-    return {//sourceFilters: []
+    return {
+      articles: []
     };
   },
   methods: {
@@ -2010,18 +2017,21 @@ __webpack_require__.r(__webpack_exports__);
     //     );
     // },
     toggleChecked: function toggleChecked(id) {
-      var values = [];
+      var ids = [];
       var checked = document.querySelectorAll("input[name=sourceNameFilter]:checked");
       var i;
 
       for (i = 0; i < checked.length; i++) {
-        values.push(checked[i].value);
+        ids.push(checked[i].value);
       }
 
-      localStorage.setItem("selectedSourceFilters", JSON.stringify(values));
+      localStorage.setItem("selectedSourceFilters", JSON.stringify(ids));
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("/updateCookies", {
-        "values": localStorage.getItem("selectedSourceFilters")
+        "ids": localStorage.getItem("selectedSourceFilters")
       }).then(function (response) {
+        Event.$emit('updatedArticles', {
+          'updatedArticles': response.data
+        });
         console.log(response.data);
       }, function (error) {
         console.log(error.response.data);
@@ -2041,6 +2051,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
+window.Event = new Vue();
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -19763,7 +19774,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "ul",
-    _vm._l(_vm.articles, function(item, key) {
+    _vm._l(_vm.mutableArticles, function(item, key) {
       return _c(
         "li",
         {

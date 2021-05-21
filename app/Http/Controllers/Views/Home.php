@@ -55,8 +55,16 @@ class Home extends Controller
 
     public function updateCookies(Request $request)
     {
-        return response('updateCookies')
-            ->cookie('selectedSourceFilters', $request->input('values'), 500);
+        $articles = DB::table('articles')
+            ->where('active', 1)
+            ->whereIn('source_id', json_decode($request->input('ids')))
+            ->orderBy('pub_date', 'DESC')
+            ->get();
+
+        $articles = $this->sanitiseArticles($articles);
+        
+        return response($articles)
+            ->cookie('selectedSourceFilters', $request->input('ids'), 500);
     }
 
     private function selectedSources($sources, $selectedSourceFilters)

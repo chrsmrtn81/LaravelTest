@@ -1,7 +1,7 @@
 <template>
     <ul>
 
-        <li v-for="item, key in articles" class="article-card__animated" v-bind:style="{'--animation-order': key}">
+        <li v-for="item, key in mutableArticles" class="article-card__animated" v-bind:style="{'--animation-order': key}">
             <div class="row mb-4 py-3 article-card">
                 <div class="col-2">
                     <div
@@ -26,12 +26,15 @@
 </template>
 
 <script type="application/javascript">
-//import axios from "axios";
 
 export default {
-    name: "app",
+    name: "ArticleListLarge",
     created() {
-        //this.fetchData()
+        Event.$on('updatedArticles', (updatedArticles) => {
+            //console.log(updatedArticles)
+            this.mutableArticles = updatedArticles.updatedArticles
+            
+        })
     },
     props: {
         articles: {
@@ -41,7 +44,7 @@ export default {
     },
     data() {
         return {
-            //sourceFilters: []
+            mutableArticles: this.articles
         };
     }
 };
