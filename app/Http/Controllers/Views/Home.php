@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Views;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -11,20 +12,28 @@ class Home extends Controller
     public function index(Request $request)
     {
         $selectedSourceFilters = $request->cookie('selectedSourceFilters');
-        
-        $articles = DB::table('articles')
-        ->where('active', 1)
-        ->whereIn('source_id', json_decode($selectedSourceFilters))
-        ->orderBy('pub_date', 'DESC')
-        ->get();
+
+        if($selectedSourceFilters){
+            $articles = DB::table('articles')
+                ->where('active', 1)
+                ->whereIn('source_id', json_decode($selectedSourceFilters))
+                ->orderBy('pub_date', 'DESC')
+                ->get();
+        } else {
+            $articles = DB::table('articles')
+                ->where('active', 1)
+                ->orderBy('pub_date', 'DESC')
+                ->get();
+        }
 
         $sources = DB::table('sources')
-        ->where('active', 1)
-        ->orderBy('nice_name', 'ASC')
-        ->get(['id', 'name', 'nice_name']);
+            ->where('active', 1)
+            ->orderBy('nice_name', 'ASC')
+            ->get(['id', 'name', 'nice_name']);
 
+        $articles = $this->sanitiseArticles($articles);
         $sources = $this->selectedSources($sources, $selectedSourceFilters);
-            
+
         $data = [
             'articles' => $articles,
             'sources' => $sources,
@@ -35,28 +44,13 @@ class Home extends Controller
             //->withCookie(cookie()->forever('selectedSourceFilters', 'these will be source ids'));
     }
 
-    public function post(Request $request)
+    public function sanitiseArticles($articles)
     {
-        $articles = DB::table('articles')
-        ->where('active', 1)
-        ->whereIn('source_id', $request->input('values'))
-        ->orderBy('pub_date', 'DESC')
-        ->get();
+        foreach ($articles as $article){
+            $article->pub_date = Carbon::parse($article->pub_date)->diffForHumans();
+        }
 
-        return [
-            'request' => $articles,
-            'test' => 'this is a test',
-        ];
-    }
-
-    public function sources()
-    {
-        $sources = DB::table('sources')
-        ->where('active', 1)
-        ->orderBy('nice_name', 'ASC')
-        ->get(['id', 'name', 'nice_name']);
-
-        return $sources;
+        return $articles;
     }
 
     public function updateCookies(Request $request)
@@ -67,11 +61,17 @@ class Home extends Controller
 
     private function selectedSources($sources, $selectedSourceFilters)
     {
-        foreach($sources as $source){
-            if (in_array($source->id, json_decode($selectedSourceFilters))){
+        if($selectedSourceFilters){
+            foreach($sources as $source){
+                if (in_array($source->id, json_decode($selectedSourceFilters))){
+                    $source->checked = true;
+                } else {
+                    $source->checked = false;
+                }
+            }
+        } else {
+            foreach($sources as $source){
                 $source->checked = true;
-            } else {
-                $source->checked = false;
             }
         }
 

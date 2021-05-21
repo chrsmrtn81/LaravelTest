@@ -19787,7 +19787,9 @@ var render = function() {
                 _vm._v(
                   "\n                    " +
                     _vm._s(item.source_name) +
-                    " /\n                "
+                    " / " +
+                    _vm._s(item.pub_date) +
+                    "\n                "
                 )
               ]),
               _vm._v(" "),
