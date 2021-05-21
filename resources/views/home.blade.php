@@ -78,8 +78,8 @@
 
                 <div class="col-9 p-0">
                     @include('partials.nav.navbar')
-                    <div class="px-5">
-                        <h1 class="my-5">Most Recent</h1>
+                    <div class="px-5 mt-5">
+                        <h1 class="my-5 pt-5">Most Recent</h1>
                         <article-list-large :articles="{{ $articles }}"></article-list-large>
                         {{-- <ul>
                             @foreach ($articles as $k => $v)
