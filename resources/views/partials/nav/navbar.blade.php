@@ -4,6 +4,9 @@
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <h1 id="cc_feed-title--scrolling" class="ms-5 fs-5 mb-0">
+
+        </h1>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">

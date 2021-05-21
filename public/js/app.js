@@ -1873,9 +1873,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ArticleListLarge",
   data: function data() {
@@ -2035,7 +2032,6 @@ __webpack_require__.r(__webpack_exports__);
         Event.$emit('updatedArticles', {
           'updatedArticles': response.data
         });
-        console.log(response.data);
       }, function (error) {
         console.log(error.response.data);
       });

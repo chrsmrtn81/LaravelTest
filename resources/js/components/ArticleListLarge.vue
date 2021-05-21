@@ -6,12 +6,9 @@
                 <div class="col-2">
                     <div
                         class="w-100 article-card__img"
-    
                         :style="[item.image ?  {'background-image': 'url(' + item.image + ')'} : {'background-image': 'url(/img/no_image.png)'}]"
-
-                        
-
-                    ></div>
+                    >
+                    </div>
                 </div>
                 <div class="col-10">
                     <a class="m-0">{{ item.title }}</a

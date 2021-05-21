@@ -95,7 +95,6 @@ export default {
             }).then(
                 response => {
                     Event.$emit('updatedArticles', {'updatedArticles': response.data})
-                    console.log(response.data)
                 },
                 error => {
                     console.log(error.response.data)

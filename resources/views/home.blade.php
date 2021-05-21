@@ -79,30 +79,8 @@
                 <div class="col-10 p-0">
                     @include('partials.nav.navbar')
                     <div class="px-5 mt-5">
-                        <h1 class="my-5 pt-5">Most Recent</h1>
+                        <h1 id="cc_feed-title" class="my-5 pt-5">Most Recent</h1>
                         <article-list-large :articles="{{ $articles }}"></article-list-large>
-                        {{-- <ul>
-                            @foreach ($articles as $k => $v)
-                                <li class="article-card__animated" style="--animation-order: {{ $k }};">
-                                    <div class="row mb-4 py-3 article-card">
-                                        <div class="col-2">
-                                            <div class="w-100 article-card__img"
-                                                style="background-image: url('{{ $v->image ? $v->image : asset('/img/no_image.png') }}')">
-                                            </div>
-                                        </div>
-                                        <div class="col-10">
-                                            <a class="m-0">{{ $v->title }}</a><br>
-                                            <div class="article-card__info-meta">{{ $v->source_name }} /
-                                                {{ Carbon\Carbon::parse($v->pub_date)->diffForHumans() }}
-                                            </div>
-                                            <div class="article-card__info-meta">
-                                                {{ $v->short_description }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul> --}}
                     </div>
                 </div>
             </div>
@@ -119,6 +97,18 @@
         document.getElementById("sideNav").style.right = "0";
         document.getElementById("main").style.left = "-320px";
     }
+
+    document.addEventListener('scroll', function(e) {
+        
+        if(window.scrollY > 80){
+            document.getElementById("cc_feed-title--scrolling").innerHTML = document.getElementById("cc_feed-title").innerHTML
+        } else {
+            document.getElementById("cc_feed-title--scrolling").innerHTML = ""
+        }
+
+        
+
+    });
 
 </script>
 <script src="{{ asset('js/app.js') }}"></script>
