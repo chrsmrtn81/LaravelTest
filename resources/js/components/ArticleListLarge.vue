@@ -1,12 +1,16 @@
 <template>
     <ul>
 
-        <li v-for="item, key in mutableArticles" class="article-card__animated" v-bind:style="{'--animation-order': key}">
+        <li v-for="item, key in mutableArticles" class="article-card__animated" :style="{'--animation-order': key}">
             <div class="row mb-4 py-3 article-card">
                 <div class="col-2">
                     <div
                         class="w-100 article-card__img"
-                        v-bind:style="{'background-image': 'url(' + item.image + ')'}"
+    
+                        :style="[item.image ?  {'background-image': 'url(' + item.image + ')'} : {'background-image': 'url(/img/no_image.png)'}]"
+
+                        
+
                     ></div>
                 </div>
                 <div class="col-10">
@@ -29,11 +33,14 @@
 
 export default {
     name: "ArticleListLarge",
+    data() {
+        return {
+            mutableArticles: this.articles
+        };
+    },
     created() {
         Event.$on('updatedArticles', (updatedArticles) => {
-            //console.log(updatedArticles)
-            this.mutableArticles = updatedArticles.updatedArticles
-            
+            this.mutableArticles = updatedArticles.updatedArticles        
         })
     },
     props: {
@@ -41,11 +48,6 @@ export default {
             type: Array,
             required: true
         }
-    },
-    data() {
-        return {
-            mutableArticles: this.articles
-        };
     }
 };
 </script>
