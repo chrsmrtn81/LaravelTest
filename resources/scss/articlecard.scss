@@ -25,6 +25,10 @@
         border-radius: 4px;
         border: 1px solid $gray-200;
     }
+
+    &__info-meta {
+        font-family: "Helvetica";
+    }
 }
 
 li.article-card__animated {

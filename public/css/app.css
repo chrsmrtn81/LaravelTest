@@ -10906,6 +10906,9 @@ a:hover {
   border-radius: 4px;
   border: 1px solid #e9ecef;
 }
+.article-card__info-meta {
+  font-family: "Helvetica";
+}
 
 li.article-card__animated {
   list-style: none;
