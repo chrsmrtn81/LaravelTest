@@ -15,7 +15,7 @@
                         <a class="m-0">{{ item.title }}</a
                         ><br />
                         <div class="article-card__info-meta">
-                            {{ item.source_name }} / {{ item.pub_date }}
+                            <span>{{ item.source_name }}</span> / <span>{{ item.pub_date }}</span> / <span>{{ item.views }} views</span>
                         </div>
                         <div class="article-card__info-meta">
                             {{ item.short_description }}
@@ -28,6 +28,8 @@
 </template>
 
 <script type="application/javascript">
+
+import axios from "axios";
 
 export default {
     name: "ArticleListLarge",
@@ -49,7 +51,20 @@ export default {
     },
     methods : {
         getArticle: function(data){
+            this.addArticleView(data.id)
             VueEvent.$emit('fetchedArticle', {'data': data })
+        },
+        addArticleView: function(id){
+            axios.post("/addArticleView", {
+                "id": id
+            }).then(
+                response => {
+                    console.log(response.data)
+                },
+                error => {
+                    console.log(error.response.data)
+                }
+            )
         }
     }
 };

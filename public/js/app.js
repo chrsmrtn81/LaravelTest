@@ -1845,6 +1845,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1874,6 +1876,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ArticleListLarge",
   data: function data() {
@@ -1896,8 +1899,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getArticle: function getArticle(data) {
+      this.addArticleView(data.id);
       VueEvent.$emit('fetchedArticle', {
         'data': data
+      });
+    },
+    addArticleView: function addArticleView(id) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("/addArticleView", {
+        "id": id
+      }).then(function (response) {
+        console.log(response.data);
+      }, function (error) {
+        console.log(error.response.data);
       });
     }
   }
@@ -1968,13 +1981,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -19809,13 +19815,11 @@ var render = function() {
                   _c("br"),
                   _vm._v(" "),
                   _c("div", { staticClass: "article-card__info-meta" }, [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(item.source_name) +
-                        " / " +
-                        _vm._s(item.pub_date) +
-                        "\n                    "
-                    )
+                    _c("span", [_vm._v(_vm._s(item.source_name))]),
+                    _vm._v(" / "),
+                    _c("span", [_vm._v(_vm._s(item.pub_date))]),
+                    _vm._v(" / "),
+                    _c("span", [_vm._v(_vm._s(item.views) + " views")])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "article-card__info-meta" }, [

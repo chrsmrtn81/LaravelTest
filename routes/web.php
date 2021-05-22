@@ -20,6 +20,7 @@ Route::post('/ajax', [Home::class, 'sources']);
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', [Home::class, 'index']);
     Route::post('/updateCookies', [Home::class, 'updateCookies']);
+    Route::post('/addArticleView', [Home::class, 'addArticleView']);
 });
 
 

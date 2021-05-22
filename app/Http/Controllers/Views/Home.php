@@ -85,4 +85,12 @@ class Home extends Controller
 
         return $sources;
     }
+
+    public function addArticleView(Request $request){
+        DB::table('articles')
+            ->whereId($request->input('id'))
+            ->increment('views');
+        
+        return $request->input('id');
+    }
 }

@@ -6,12 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Laravel</title>
+    <title>Counterculture</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+
+
+    <script>
+        
+        document.addEventListener('scroll', function(e) {
+            
+            if(window.scrollY > 80){
+                document.getElementById("cc_feed-title--scrolling").innerHTML = document.getElementById("cc_feed-title").innerHTML
+            } else {
+                document.getElementById("cc_feed-title--scrolling").innerHTML = ""
+            }
+            
+        });
+
     </script>
 
 </head>
@@ -40,11 +55,7 @@
                                     </button>
                                 </h2>
 
-
-
                                 <sidebar-filters :source-filters="{{ $sources }}"></sidebar-filters>
-
-
 
                             </div>
                             <div class="accordion-item">
@@ -69,26 +80,17 @@
                     @include('partials.nav.navbar')
                     <div class="px-5 mt-5">
                         <h1 id="cc_feed-title" class="my-5 pt-5">Most Recent</h1>
+
                         <article-list-large :articles="{{ $articles }}"></article-list-large>
                         <article-off-canvas></article-list-large>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
-<script>
-    document.addEventListener('scroll', function(e) {
-        
-        if(window.scrollY > 80){
-            document.getElementById("cc_feed-title--scrolling").innerHTML = document.getElementById("cc_feed-title").innerHTML
-        } else {
-            document.getElementById("cc_feed-title--scrolling").innerHTML = ""
-        }
-        
-    });
 
-</script>
 <script src="{{ asset('js/app.js') }}"></script>
 
 </html>

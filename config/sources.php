@@ -89,5 +89,17 @@ return [
     //     'url' => 'https://www.oann.com/feed/',
     //     'active' => true,
     // ],
+    // [
+    //     'name' => 'pjmedia',
+    //     'nice_name' => 'PJ Media',
+    //     'url' => 'https://pjmedia.com/feed/',
+    //     'active' => true,
+    // ],
+    [
+        'name' => 'dailywire',
+        'nice_name' => 'The Daily Wire',
+        'url' => 'https://www.dailywire.com/feeds/rss.xml',
+        'active' => true,
+    ],
 ];
 
