@@ -1,8 +1,8 @@
 <template>
     <ul>
 
-        <li v-for="item, key in mutableArticles" class="article-card__animated" :style="{'--animation-order': key}">
-            <a data-bs-toggle="offcanvas" href="#offcanvasRight" role="button" aria-controls="offcanvasRight">
+        <li v-for="item, key in mutableArticles" class="article-card__animated" :style="{'--animation-order': key}" >
+            <a data-bs-toggle="offcanvas" v-on:click="getArticle(item)" href="#offcanvasRight" role="button" aria-controls="offcanvasRight">
                 <div class="row mb-4 py-3 article-card">
                     <div class="col-2">
                         <div
@@ -45,6 +45,11 @@ export default {
         articles: {
             type: Array,
             required: true
+        }
+    },
+    methods : {
+        getArticle: function(data){
+            VueEvent.$emit('fetchedArticle', {'data': data })
         }
     }
 };

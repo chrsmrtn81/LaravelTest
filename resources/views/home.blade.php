@@ -69,19 +69,8 @@
                     @include('partials.nav.navbar')
                     <div class="px-5 mt-5">
                         <h1 id="cc_feed-title" class="my-5 pt-5">Most Recent</h1>
-
-                        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                        <div class="offcanvas-header">
-                            <h5 id="offcanvasRightLabel">Offcanvas right</h5>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
-                        <div class="offcanvas-body">
-                            ...
-                        </div>
-                        </div>
-
-
                         <article-list-large :articles="{{ $articles }}"></article-list-large>
+                        <article-off-canvas></article-list-large>
                     </div>
                 </div>
             </div>
