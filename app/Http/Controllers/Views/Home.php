@@ -87,10 +87,10 @@ class Home extends Controller
     }
 
     public function addArticleView(Request $request){
-        DB::table('articles')
+        $update = DB::table('articles')
             ->whereId($request->input('id'))
             ->increment('views');
         
-        return $request->input('id');
+        return $update;
     }
 }

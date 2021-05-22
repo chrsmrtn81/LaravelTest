@@ -15,7 +15,9 @@
                         <a class="m-0">{{ item.title }}</a
                         ><br />
                         <div class="article-card__info-meta">
-                            <span>{{ item.source_name }}</span> / <span>{{ item.pub_date }}</span> / <span>{{ item.views }} views</span>
+                            <span>{{ item.source_name }}</span> / 
+                            <span>{{ item.pub_date }}</span> / 
+                            <span :class="'article-card__info-meta__views-' + item.id">{{ item.views }}</span> views
                         </div>
                         <div class="article-card__info-meta">
                             {{ item.short_description }}
@@ -59,7 +61,8 @@ export default {
                 "id": id
             }).then(
                 response => {
-                    console.log(response.data)
+                    let currentViews = parseInt(document.getElementsByClassName("article-card__info-meta__views-" + id)[0].innerHTML)
+                    document.getElementsByClassName("article-card__info-meta__views-" + id)[0].innerHTML = currentViews + response.data
                 },
                 error => {
                     console.log(error.response.data)

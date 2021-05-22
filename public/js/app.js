@@ -1876,6 +1876,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ArticleListLarge",
@@ -1908,7 +1910,8 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("/addArticleView", {
         "id": id
       }).then(function (response) {
-        console.log(response.data);
+        var currentViews = parseInt(document.getElementsByClassName("article-card__info-meta__views-" + id)[0].innerHTML);
+        document.getElementsByClassName("article-card__info-meta__views-" + id)[0].innerHTML = currentViews + response.data;
       }, function (error) {
         console.log(error.response.data);
       });
@@ -19816,10 +19819,15 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "article-card__info-meta" }, [
                     _c("span", [_vm._v(_vm._s(item.source_name))]),
-                    _vm._v(" / "),
+                    _vm._v(" / \n                        "),
                     _c("span", [_vm._v(_vm._s(item.pub_date))]),
-                    _vm._v(" / "),
-                    _c("span", [_vm._v(_vm._s(item.views) + " views")])
+                    _vm._v(" / \n                        "),
+                    _c(
+                      "span",
+                      { class: "article-card__info-meta__views-" + item.id },
+                      [_vm._v(_vm._s(item.views))]
+                    ),
+                    _vm._v(" views\n                    ")
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "article-card__info-meta" }, [
