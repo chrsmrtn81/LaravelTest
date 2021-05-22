@@ -18,16 +18,6 @@
 
 <body>
     <div id="app">
-        <div id="sideNav" class="sideNav">
-            <span class="sideNav__closeBtn" onClick=navigation__closeNav()>
-                &times;
-            </span>
-            <ul class="pl-0">
-                <li>item 1</li>
-                <li>item 2</li>
-                <li>item 3</li>
-            </ul>
-        </div>
         <div id="main" class="container-fluid">
             <div class="row">
 
@@ -88,16 +78,6 @@
     </div>
 </body>
 <script>
-    function navigation__closeNav() {
-        document.getElementById("sideNav").style.right = "-320px";
-        document.getElementById("main").style.left = "0";
-    }
-
-    function navigation__openNav() {
-        document.getElementById("sideNav").style.right = "0";
-        document.getElementById("main").style.left = "-320px";
-    }
-
     document.addEventListener('scroll', function(e) {
         
         if(window.scrollY > 80){
@@ -105,9 +85,7 @@
         } else {
             document.getElementById("cc_feed-title--scrolling").innerHTML = ""
         }
-
         
-
     });
 
 </script>

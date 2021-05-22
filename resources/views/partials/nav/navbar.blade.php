@@ -22,9 +22,6 @@
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
-            <span class="navbar-text">
-                <span onClick=navigation__openNav()>menu</span>
-            </span>
         </div>
     </div>
 </nav>
