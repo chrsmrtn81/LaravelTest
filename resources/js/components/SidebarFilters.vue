@@ -94,7 +94,7 @@ export default {
                 "ids": localStorage.getItem("selectedSourceFilters")
             }).then(
                 response => {
-                    Event.$emit('updatedArticles', {'updatedArticles': response.data})
+                    VueEvent.$emit('updatedArticles', {'updatedArticles': response.data})
                 },
                 error => {
                     console.log(error.response.data)

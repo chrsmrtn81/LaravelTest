@@ -1873,6 +1873,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ArticleListLarge",
   data: function data() {
@@ -1883,7 +1884,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    Event.$on('updatedArticles', function (updatedArticles) {
+    VueEvent.$on('updatedArticles', function (updatedArticles) {
       _this.mutableArticles = updatedArticles.updatedArticles;
     });
   },
@@ -2029,7 +2030,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("/updateCookies", {
         "ids": localStorage.getItem("selectedSourceFilters")
       }).then(function (response) {
-        Event.$emit('updatedArticles', {
+        VueEvent.$emit('updatedArticles', {
           'updatedArticles': response.data
         });
       }, function (error) {
@@ -2050,7 +2051,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
-window.Event = new Vue();
+window.VueEvent = new Vue();
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -19781,41 +19782,54 @@ var render = function() {
           style: { "--animation-order": key }
         },
         [
-          _c("div", { staticClass: "row mb-4 py-3 article-card" }, [
-            _c("div", { staticClass: "col-2" }, [
-              _c("div", {
-                staticClass: "w-100 article-card__img",
-                style: [
-                  item.image
-                    ? { "background-image": "url(" + item.image + ")" }
-                    : { "background-image": "url(/img/no_image.png)" }
-                ]
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-10" }, [
-              _c("a", { staticClass: "m-0" }, [_vm._v(_vm._s(item.title))]),
-              _c("br"),
-              _vm._v(" "),
-              _c("div", { staticClass: "article-card__info-meta" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(item.source_name) +
-                    " / " +
-                    _vm._s(item.pub_date) +
-                    "\n                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "article-card__info-meta" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(item.short_description) +
-                    "\n                "
-                )
+          _c(
+            "a",
+            {
+              attrs: {
+                "data-bs-toggle": "offcanvas",
+                href: "#offcanvasRight",
+                role: "button",
+                "aria-controls": "offcanvasRight"
+              }
+            },
+            [
+              _c("div", { staticClass: "row mb-4 py-3 article-card" }, [
+                _c("div", { staticClass: "col-2" }, [
+                  _c("div", {
+                    staticClass: "w-100 article-card__img",
+                    style: [
+                      item.image
+                        ? { "background-image": "url(" + item.image + ")" }
+                        : { "background-image": "url(/img/no_image.png)" }
+                    ]
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-10" }, [
+                  _c("a", { staticClass: "m-0" }, [_vm._v(_vm._s(item.title))]),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "article-card__info-meta" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(item.source_name) +
+                        " / " +
+                        _vm._s(item.pub_date) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "article-card__info-meta" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(item.short_description) +
+                        "\n                    "
+                    )
+                  ])
+                ])
               ])
-            ])
-          ])
+            ]
+          )
         ]
       )
     }),
