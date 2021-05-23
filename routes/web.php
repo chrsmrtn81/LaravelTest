@@ -4,6 +4,7 @@ use App\Http\Controllers\Views\Home;
 use App\Http\Controllers\Views\Test;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RssFeeds\ProcessRssFeeds;
+use App\Http\Controllers\Views\Errors\IpWhitelist;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,12 @@ use App\Http\Controllers\RssFeeds\ProcessRssFeeds;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::post('/ajax', [Home::class, 'sources']);
 
-Route::group(['middleware' => ['web']], function () {
+Route::get('/ip-whitelist', [IpWhitelist::class, 'view'])->name('ip-whitelist');
+
+Route::group(['middleware' => ['web', 'whitelist']], function () {
     Route::get('/', [Home::class, 'index']);
     Route::post('/updateCookies', [Home::class, 'updateCookies']);
     Route::post('/addArticleView', [Home::class, 'addArticleView']);
