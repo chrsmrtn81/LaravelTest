@@ -3,6 +3,7 @@ require('./bootstrap');
 window.Vue = require('vue').default;
 window.VueEvent = new Vue();
 
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -11,13 +12,10 @@ window.VueEvent = new Vue();
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./components', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./components', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('sidebar-filters', require('./components/SidebarFilters.vue').default);
-Vue.component('article-list-large', require('./components/ArticleListLarge.vue').default);
-Vue.component('article-off-canvas', require('./components/ArticleOffCanvas.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -14,21 +14,6 @@
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
 
-
-    <script>
-        
-        document.addEventListener('scroll', function(e) {
-            
-            if(window.scrollY > 80){
-                document.getElementById("cc_feed-title--scrolling").innerHTML = document.getElementById("cc_feed-title").innerHTML
-            } else {
-                document.getElementById("cc_feed-title--scrolling").innerHTML = ""
-            }
-            
-        });
-
-    </script>
-
 </head>
 
 <body>
@@ -90,6 +75,20 @@
         </div>
     </div>
 </body>
+
+<script>
+        
+    window.addEventListener('scroll', function(e) {
+        
+        if(window.scrollY > 80){
+            document.getElementById("cc_feed-title--scrolling").innerHTML = document.getElementById("cc_feed-title").innerHTML
+        } else {
+            document.getElementById("cc_feed-title--scrolling").innerHTML = ""
+        }
+        
+    });
+
+</script>
 
 <script src="{{ asset('js/app.js') }}"></script>
 

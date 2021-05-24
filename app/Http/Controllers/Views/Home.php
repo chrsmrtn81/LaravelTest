@@ -93,4 +93,13 @@ class Home extends Controller
         
         return $update;
     }
+
+    public function test(){
+        $articles = DB::table('articles')
+            ->where('active', 1)
+            ->orderBy('pub_date', 'DESC')
+            ->get();
+        
+        return $articles;
+    }
 }

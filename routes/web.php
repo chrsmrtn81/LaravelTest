@@ -17,7 +17,7 @@ use App\Http\Controllers\Views\Errors\IpWhitelist;
 |
 */
 
-Route::post('/ajax', [Home::class, 'sources']);
+Route::post('/ajax', [Home::class, 'test']);
 
 Route::get('/ip-whitelist', [IpWhitelist::class, 'view'])->name('ip-whitelist');
 
@@ -25,6 +25,8 @@ Route::group(['middleware' => ['web', 'whitelist']], function () {
     Route::get('/', [Home::class, 'index']);
     Route::post('/updateCookies', [Home::class, 'updateCookies']);
     Route::post('/addArticleView', [Home::class, 'addArticleView']);
+
+    Route::get('/test', [Test::class, 'index']);
 });
 
 
