@@ -1917,18 +1917,13 @@ __webpack_require__.r(__webpack_exports__);
       window.axios.post("/test-fetch", {
         "offset": this.loadArticleOffset
       }).then(function (response) {
-        var array3 = _this2.mutableArticles.concat(response.data);
+        var fetchedArticles = _this2.mutableArticles.concat(response.data);
 
-        _this2.mutableArticles = array3; // let i = 0
-        // while(i < response.data.length){
-        //     this.mutableArticles.push(response.data[i]);
-        //     i++
-        // }
+        _this2.mutableArticles = fetchedArticles;
       }, function (error) {
         console.log(error.response.data);
       });
       this.loadArticleOffset += 10;
-      console.log(this.loadArticleOffset);
     },
     getArticle: function getArticle(data) {
       this.addArticleView(data.id);

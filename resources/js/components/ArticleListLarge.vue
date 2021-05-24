@@ -60,7 +60,6 @@ export default {
     },
     methods : {
         handleScroll: function(){
-
             if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1){
                 this.fetchMoreArticles()
             }
@@ -70,17 +69,8 @@ export default {
             "offset": this.loadArticleOffset
             }).then(
                 response => {
-
-                    const array3 = this.mutableArticles.concat(response.data);
-
-                    this.mutableArticles = array3
-
-                    // let i = 0
-
-                    // while(i < response.data.length){
-                    //     this.mutableArticles.push(response.data[i]);
-                    //     i++
-                    // }
+                    const fetchedArticles = this.mutableArticles.concat(response.data);
+                    this.mutableArticles = fetchedArticles
                 },
                 error => {
                     console.log(error.response.data)
@@ -88,8 +78,6 @@ export default {
             )
         
         this.loadArticleOffset += 10
-
-        console.log(this.loadArticleOffset)
         },
         getArticle: function(data){
             this.addArticleView(data.id)
