@@ -17,12 +17,16 @@ class Home extends Controller
             $articles = DB::table('articles')
                 ->where('active', 1)
                 ->whereIn('source_id', json_decode($selectedSourceFilters))
+                // ->skip($request->input('offset'))
+                ->take(10)
                 ->orderBy('pub_date', 'DESC')
                 ->get();
         } else {
             $articles = DB::table('articles')
                 ->where('active', 1)
                 ->orderBy('pub_date', 'DESC')
+                // ->skip($request->input('offset'))
+                ->take(10)
                 ->get();
         }
 
@@ -59,6 +63,8 @@ class Home extends Controller
             ->where('active', 1)
             ->whereIn('source_id', json_decode($request->input('ids')))
             ->orderBy('pub_date', 'DESC')
+            // ->skip($request->input('offset'))
+            ->take(10)
             ->get();
 
         $articles = $this->sanitiseArticles($articles);
@@ -94,12 +100,16 @@ class Home extends Controller
         return $update;
     }
 
-    public function test(){
+    public function fetchMoreArticles(Request $request){
         $articles = DB::table('articles')
             ->where('active', 1)
             ->orderBy('pub_date', 'DESC')
+            ->skip($request->input('offset'))
+            ->take(10)
             ->get();
         
-        return $articles;
+        $articles = $this->sanitiseArticles($articles);
+        
+        return response($articles);
     }
 }

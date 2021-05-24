@@ -1881,9 +1881,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ArticleListLarge",
+  props: {
+    articles: {
+      type: Array,
+      required: true
+    }
+  },
   data: function data() {
     return {
-      mutableArticles: this.articles
+      mutableArticles: this.articles,
+      loadArticleOffset: 10
     };
   },
   created: function created() {
@@ -1892,14 +1899,37 @@ __webpack_require__.r(__webpack_exports__);
     VueEvent.$on('updatedArticles', function (updatedArticles) {
       _this.mutableArticles = updatedArticles.updatedArticles;
     });
+    this.handleDebouncedScroll = this.debounce(this.handleScroll, 100);
+    window.addEventListener('scroll', this.handleDebouncedScroll);
   },
-  props: {
-    articles: {
-      type: Array,
-      required: true
-    }
+  destroyed: function destroyed() {
+    window.removeEventListener('scroll', this.handleDebouncedScroll);
   },
   methods: {
+    handleScroll: function handleScroll() {
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1) {
+        this.fetchMoreArticles();
+      }
+    },
+    fetchMoreArticles: function fetchMoreArticles() {
+      var _this2 = this;
+
+      window.axios.post("/test-fetch", {
+        "offset": this.loadArticleOffset
+      }).then(function (response) {
+        var array3 = _this2.mutableArticles.concat(response.data);
+
+        _this2.mutableArticles = array3; // let i = 0
+        // while(i < response.data.length){
+        //     this.mutableArticles.push(response.data[i]);
+        //     i++
+        // }
+      }, function (error) {
+        console.log(error.response.data);
+      });
+      this.loadArticleOffset += 10;
+      console.log(this.loadArticleOffset);
+    },
     getArticle: function getArticle(data) {
       this.addArticleView(data.id);
       VueEvent.$emit('fetchedArticle', {
@@ -1915,6 +1945,23 @@ __webpack_require__.r(__webpack_exports__);
       }, function (error) {
         console.log(error.response.data);
       });
+    },
+    debounce: function debounce(func, wait, immediate) {
+      var timeout;
+      return function executedFunction() {
+        var context = this;
+        var args = arguments;
+
+        var later = function later() {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
     }
   }
 });
@@ -19885,71 +19932,64 @@ var render = function() {
   return _c(
     "ul",
     _vm._l(_vm.mutableArticles, function(item, key) {
-      return _c(
-        "li",
-        {
-          staticClass: "article-card__animated",
-          style: { "--animation-order": key }
-        },
-        [
-          _c(
-            "a",
-            {
-              attrs: {
-                "data-bs-toggle": "offcanvas",
-                href: "#offcanvasRight",
-                role: "button",
-                "aria-controls": "offcanvasRight"
-              },
-              on: {
-                click: function($event) {
-                  return _vm.getArticle(item)
-                }
-              }
+      return _c("li", { staticClass: "article-card__animated" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              "data-bs-toggle": "offcanvas",
+              href: "#offcanvasRight",
+              role: "button",
+              "aria-controls": "offcanvasRight"
             },
-            [
-              _c("div", { staticClass: "row mb-4 py-3 article-card" }, [
-                _c("div", { staticClass: "col-2" }, [
-                  _c("div", {
-                    staticClass: "w-100 article-card__img",
-                    style: [
-                      item.image
-                        ? { "background-image": "url(" + item.image + ")" }
-                        : { "background-image": "url(/img/no_image.png)" }
-                    ]
-                  })
+            on: {
+              click: function($event) {
+                return _vm.getArticle(item)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "row mb-4 py-3 article-card" }, [
+              _c("div", { staticClass: "col-2" }, [
+                _c("div", {
+                  staticClass: "w-100 article-card__img",
+                  style: [
+                    item.image
+                      ? { "background-image": "url(" + item.image + ")" }
+                      : { "background-image": "url(/img/no_image.png)" }
+                  ]
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-10" }, [
+                _c("a", { staticClass: "m-0" }, [_vm._v(_vm._s(item.title))]),
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticClass: "article-card__info-meta" }, [
+                  _c("span", [_vm._v(_vm._s(item.source_name))]),
+                  _vm._v(" / \n                        "),
+                  _c("span", [_vm._v(_vm._s(item.pub_date))]),
+                  _vm._v(" / \n                        "),
+                  _c(
+                    "span",
+                    { class: "article-card__info-meta__views-" + item.id },
+                    [_vm._v(_vm._s(item.views))]
+                  ),
+                  _vm._v(" views\n                    ")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-10" }, [
-                  _c("a", { staticClass: "m-0" }, [_vm._v(_vm._s(item.title))]),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "article-card__info-meta" }, [
-                    _c("span", [_vm._v(_vm._s(item.source_name))]),
-                    _vm._v(" / \n                        "),
-                    _c("span", [_vm._v(_vm._s(item.pub_date))]),
-                    _vm._v(" / \n                        "),
-                    _c(
-                      "span",
-                      { class: "article-card__info-meta__views-" + item.id },
-                      [_vm._v(_vm._s(item.views))]
-                    ),
-                    _vm._v(" views\n                    ")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "article-card__info-meta" }, [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(item.short_description) +
-                        "\n                    "
-                    )
-                  ])
+                _c("div", { staticClass: "article-card__info-meta" }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(item.short_description) +
+                      "\n                    "
+                  )
                 ])
               ])
-            ]
-          )
-        ]
-      )
+            ])
+          ]
+        )
+      ])
     }),
     0
   )

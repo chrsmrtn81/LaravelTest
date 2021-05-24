@@ -25,8 +25,10 @@ Route::group(['middleware' => ['web', 'whitelist']], function () {
     Route::get('/', [Home::class, 'index']);
     Route::post('/updateCookies', [Home::class, 'updateCookies']);
     Route::post('/addArticleView', [Home::class, 'addArticleView']);
+    Route::post('/fetchMoreArticles', [Home::class, 'fetchMoreArticles']);
 
     Route::get('/test', [Test::class, 'index']);
+    Route::post('/test-fetch', [Test::class, 'fetchArticles']);
 });
 
 

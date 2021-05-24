@@ -14,6 +14,15 @@
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+    <style>
+        .testDiv {
+            height: 150px;
+            background: greenyellow;
+            margin: 30px 0;
+        }
+    </style>
 
   
 </head>
@@ -28,32 +37,45 @@
 
 <script>
 
-    const URL = 'https://source.unsplash.com/random/200x200?sig='
     const container = document.querySelector('.container')
 
-    function getRandNumber(){
-        return Math.floor(Math.random() * 100)
+    let offset = 0
+
+    function loadArticles(){
+
+        window.axios.post("/test-fetch", {
+            "offset": offset
+            }).then(
+                response => {
+                    
+
+                    let i = 0
+                    while(i < response.data.length){
+                        const div = document.createElement('div')
+                        div.innerHTML = response.data[i].title
+                        div.className = "testDiv"
+                        container.appendChild(div)
+
+                        console.log(response.data[i])
+                        i++
+                    }
+                },
+                error => {
+                    console.log(error.response.data)
+                }
+            )
+        
+        offset += 10
+
+        console.log(offset)
     }
 
-    function loadImages(numImages = 10){
-        let i = 0
-        while(i < numImages){
-            const img = document.createElement('img')
-            img.src = `${URL}${getRandNumber()}`
-            container.appendChild(img)
-            i++
-        }
-    }
-
-    loadImages()
+    loadArticles()
             
     window.addEventListener('scroll', function() {
 
-        console.log(document.documentElement.scrollHeight)
-        console.log(window.scrollY + window.innerHeight)
-
         if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1){
-            loadImages()
+            loadArticles()
         }
         
     })

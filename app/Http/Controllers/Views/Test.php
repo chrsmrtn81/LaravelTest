@@ -18,4 +18,18 @@ class Test extends Controller
         return response()
             ->view('test', $data, 200);
     }
+
+    public function fetchArticles(Request $request)
+    {
+
+        
+        $articles = DB::table('articles')
+            ->where('active', 1)
+            ->orderBy('pub_date', 'DESC')
+            ->skip($request->input('offset'))
+            ->take(10)
+            ->get();
+        
+        return response($articles);
+    }
 }

@@ -1,7 +1,7 @@
 <template>
     <ul>
 
-        <li v-for="item, key in mutableArticles" class="article-card__animated" :style="{'--animation-order': key}" >
+        <li v-for="item, key in mutableArticles" class="article-card__animated">
             <a data-bs-toggle="offcanvas" v-on:click="getArticle(item)" href="#offcanvasRight" role="button" aria-controls="offcanvasRight">
                 <div class="row mb-4 py-3 article-card">
                     <div class="col-2">
@@ -35,23 +35,62 @@ import axios from "axios";
 
 export default {
     name: "ArticleListLarge",
-    data() {
-        return {
-            mutableArticles: this.articles
-        };
-    },
-    created() {
-        VueEvent.$on('updatedArticles', (updatedArticles) => {
-            this.mutableArticles = updatedArticles.updatedArticles        
-        })
-    },
     props: {
         articles: {
             type: Array,
             required: true
         }
     },
+    data() {
+        return {
+            mutableArticles: this.articles,
+            loadArticleOffset: 10
+        };
+    },
+    created() {
+        VueEvent.$on('updatedArticles', (updatedArticles) => {
+            this.mutableArticles = updatedArticles.updatedArticles        
+        })
+
+        this.handleDebouncedScroll = this.debounce(this.handleScroll, 100);
+        window.addEventListener('scroll', this.handleDebouncedScroll);
+    },
+    destroyed () {
+        window.removeEventListener('scroll', this.handleDebouncedScroll);
+    },
     methods : {
+        handleScroll: function(){
+
+            if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1){
+                this.fetchMoreArticles()
+            }
+        },
+        fetchMoreArticles: function(){
+            window.axios.post("/test-fetch", {
+            "offset": this.loadArticleOffset
+            }).then(
+                response => {
+
+                    const array3 = this.mutableArticles.concat(response.data);
+
+                    this.mutableArticles = array3
+
+                    // let i = 0
+
+                    // while(i < response.data.length){
+                    //     this.mutableArticles.push(response.data[i]);
+                    //     i++
+                    // }
+                },
+                error => {
+                    console.log(error.response.data)
+                }
+            )
+        
+        this.loadArticleOffset += 10
+
+        console.log(this.loadArticleOffset)
+        },
         getArticle: function(data){
             this.addArticleView(data.id)
             VueEvent.$emit('fetchedArticle', {'data': data })
@@ -68,6 +107,27 @@ export default {
                     console.log(error.response.data)
                 }
             )
+        },
+        debounce: function (func, wait, immediate) {
+        var timeout;
+
+            return function executedFunction() {
+                var context = this;
+                var args = arguments;
+                    
+                var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+                };
+
+                var callNow = immediate && !timeout;
+                
+                clearTimeout(timeout);
+
+                timeout = setTimeout(later, wait);
+                
+                if (callNow) func.apply(context, args);
+            }
         }
     }
 };
