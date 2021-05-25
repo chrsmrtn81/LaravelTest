@@ -64,8 +64,7 @@
                 <div class="col-10 p-0">
                     @include('partials.nav.navbar')
                     <div class="px-5 mt-5">
-                        <h1 id="cc_feed-title" class="my-5 pt-5">Most Recent</h1>
-
+                        
                         <article-list-large :articles="{{ $articles }}"></article-list-large>
                         <article-off-canvas></article-list-large>
 

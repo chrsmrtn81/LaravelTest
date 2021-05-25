@@ -1878,6 +1878,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ArticleListLarge",
@@ -1890,20 +1895,26 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       mutableArticles: this.articles,
-      loadArticleOffset: 10
+      loadArticleOffset: 10,
+      displayList: true,
+      scrollToTop: false
     };
   },
   created: function created() {
     var _this = this;
 
     VueEvent.$on('updatedArticles', function (updatedArticles) {
-      document.getElementById("article-card--large").style.display = "none";
-      window.scrollTo(0, 0);
+      if (!window.scrollY == 0) {
+        window.scrollTo(0, 0);
+        _this.scrollToTop = true;
+      }
+
+      _this.displayList = false;
       _this.mutableArticles = [];
+      _this.mutableArticles = updatedArticles.updatedArticles;
 
       if (window.scrollY == 0) {
-        _this.mutableArticles = updatedArticles.updatedArticles;
-        document.getElementById("article-card--large").style.display = "block";
+        setTimeout(_this.test, 1000);
       }
     });
     this.handleDebouncedScroll = this.debounce(this.handleScroll, 100);
@@ -1913,10 +1924,22 @@ __webpack_require__.r(__webpack_exports__);
     window.removeEventListener('scroll', this.handleDebouncedScroll);
   },
   methods: {
-    handleScroll: function handleScroll() {
+    updateArticles: function updateArticles() {
+      this.mutableArticles = updatedArticles.updatedArticles;
+      this.displayList = true;
+    },
+    handleScroll: function handleScroll(test) {
       if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1) {
         this.fetchMoreArticles();
       }
+
+      if (window.scrollY == 0 && this.scrollToTop == true) {
+        setTimeout(this.test, 1000);
+      }
+    },
+    test: function test() {
+      this.scrollToTop = false;
+      this.displayList = true;
     },
     fetchMoreArticles: function fetchMoreArticles() {
       var _this2 = this;
@@ -19744,6 +19767,40 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/LoadingSpinner.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/LoadingSpinner.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+var script = {}
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__.default)(
+  script,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+component.options.__file = "resources/js/components/LoadingSpinner.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/SidebarFilters.vue":
 /*!****************************************************!*\
   !*** ./resources/js/components/SidebarFilters.vue ***!
@@ -19931,71 +19988,94 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "ul",
-    { attrs: { id: "article-card--large" } },
-    _vm._l(_vm.mutableArticles, function(item, key) {
-      return _c("li", { staticClass: "article-card__animated" }, [
-        _c(
-          "a",
+  return _c("div", [
+    _c("h1", { staticClass: "my-5 pt-5", attrs: { id: "cc_feed-title" } }, [
+      _vm._v("Most Recent")
+    ]),
+    _vm._v(" "),
+    this.displayList
+      ? _c(
+          "ul",
+          { attrs: { id: "article-card--large" } },
+          _vm._l(_vm.mutableArticles, function(item, key) {
+            return _c("li", { staticClass: "article-card__animated" }, [
+              _c(
+                "a",
+                {
+                  attrs: {
+                    "data-bs-toggle": "offcanvas",
+                    href: "#offcanvasRight",
+                    role: "button",
+                    "aria-controls": "offcanvasRight"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.getArticle(item)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "row mb-4 py-3 article-card" }, [
+                    _c("div", { staticClass: "col-2" }, [
+                      _c("div", {
+                        staticClass: "w-100 article-card__img",
+                        style: [
+                          item.image
+                            ? { "background-image": "url(" + item.image + ")" }
+                            : { "background-image": "url(/img/no_image.png)" }
+                        ]
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-10" }, [
+                      _c("a", { staticClass: "m-0" }, [
+                        _vm._v(_vm._s(item.title))
+                      ]),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "article-card__info-meta" }, [
+                        _c("span", [_vm._v(_vm._s(item.source_name))]),
+                        _vm._v(" / \n                            "),
+                        _c("span", [_vm._v(_vm._s(item.pub_date))]),
+                        _vm._v(" / \n                            "),
+                        _c(
+                          "span",
+                          {
+                            class: "article-card__info-meta__views-" + item.id
+                          },
+                          [_vm._v(_vm._s(item.views))]
+                        ),
+                        _vm._v(" views\n                        ")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "article-card__info-meta" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(item.short_description) +
+                            "\n                        "
+                        )
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          }),
+          0
+        )
+      : _c(
+          "div",
           {
-            attrs: {
-              "data-bs-toggle": "offcanvas",
-              href: "#offcanvasRight",
-              role: "button",
-              "aria-controls": "offcanvasRight"
-            },
-            on: {
-              click: function($event) {
-                return _vm.getArticle(item)
-              }
-            }
+            staticClass: "spinner-border text-warning",
+            attrs: { role: "status" }
           },
           [
-            _c("div", { staticClass: "row mb-4 py-3 article-card" }, [
-              _c("div", { staticClass: "col-2" }, [
-                _c("div", {
-                  staticClass: "w-100 article-card__img",
-                  style: [
-                    item.image
-                      ? { "background-image": "url(" + item.image + ")" }
-                      : { "background-image": "url(/img/no_image.png)" }
-                  ]
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-10" }, [
-                _c("a", { staticClass: "m-0" }, [_vm._v(_vm._s(item.title))]),
-                _c("br"),
-                _vm._v(" "),
-                _c("div", { staticClass: "article-card__info-meta" }, [
-                  _c("span", [_vm._v(_vm._s(item.source_name))]),
-                  _vm._v(" / \n                        "),
-                  _c("span", [_vm._v(_vm._s(item.pub_date))]),
-                  _vm._v(" / \n                        "),
-                  _c(
-                    "span",
-                    { class: "article-card__info-meta__views-" + item.id },
-                    [_vm._v(_vm._s(item.views))]
-                  ),
-                  _vm._v(" views\n                    ")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "article-card__info-meta" }, [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(item.short_description) +
-                      "\n                    "
-                  )
-                ])
-              ])
+            _c("span", { staticClass: "visually-hidden" }, [
+              _vm._v("Loading...")
             ])
           ]
         )
-      ])
-    }),
-    0
-  )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -32301,6 +32381,7 @@ var map = {
 	"./ArticleListLarge.vue": "./resources/js/components/ArticleListLarge.vue",
 	"./ArticleOffCanvas.vue": "./resources/js/components/ArticleOffCanvas.vue",
 	"./ExampleComponent.vue": "./resources/js/components/ExampleComponent.vue",
+	"./LoadingSpinner.vue": "./resources/js/components/LoadingSpinner.vue",
 	"./SidebarFilters.vue": "./resources/js/components/SidebarFilters.vue"
 };
 
