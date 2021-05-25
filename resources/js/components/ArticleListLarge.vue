@@ -1,5 +1,5 @@
 <template>
-    <ul>
+    <ul id="article-card--large">
 
         <li v-for="item, key in mutableArticles" class="article-card__animated">
             <a data-bs-toggle="offcanvas" v-on:click="getArticle(item)" href="#offcanvasRight" role="button" aria-controls="offcanvasRight">
@@ -49,14 +49,20 @@ export default {
     },
     created() {
         VueEvent.$on('updatedArticles', (updatedArticles) => {
-            this.mutableArticles = updatedArticles.updatedArticles        
+            document.getElementById("article-card--large").style.display = "none"
+            window.scrollTo(0, 0)
+            this.mutableArticles = []
+            if(window.scrollY == 0){
+                this.mutableArticles = updatedArticles.updatedArticles
+                document.getElementById("article-card--large").style.display = "block"
+            }     
         })
 
-        this.handleDebouncedScroll = this.debounce(this.handleScroll, 100);
-        window.addEventListener('scroll', this.handleDebouncedScroll);
+        this.handleDebouncedScroll = this.debounce(this.handleScroll, 100)
+        window.addEventListener('scroll', this.handleDebouncedScroll)
     },
     destroyed () {
-        window.removeEventListener('scroll', this.handleDebouncedScroll);
+        window.removeEventListener('scroll', this.handleDebouncedScroll)
     },
     methods : {
         handleScroll: function(){

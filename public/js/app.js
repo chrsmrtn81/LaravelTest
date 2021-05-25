@@ -1897,7 +1897,14 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     VueEvent.$on('updatedArticles', function (updatedArticles) {
-      _this.mutableArticles = updatedArticles.updatedArticles;
+      document.getElementById("article-card--large").style.display = "none";
+      window.scrollTo(0, 0);
+      _this.mutableArticles = [];
+
+      if (window.scrollY == 0) {
+        _this.mutableArticles = updatedArticles.updatedArticles;
+        document.getElementById("article-card--large").style.display = "block";
+      }
     });
     this.handleDebouncedScroll = this.debounce(this.handleScroll, 100);
     window.addEventListener('scroll', this.handleDebouncedScroll);
@@ -19926,6 +19933,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "ul",
+    { attrs: { id: "article-card--large" } },
     _vm._l(_vm.mutableArticles, function(item, key) {
       return _c("li", { staticClass: "article-card__animated" }, [
         _c(
