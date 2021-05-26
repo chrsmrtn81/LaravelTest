@@ -1,15 +1,44 @@
 <template>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
-            <h5 id="offcanvasRightLabel">{{ article.title }}</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            {{ article.source_name }} <br>
-            {{ article.pub_date }}
+
+
+                <div class="row m-0 h-100">
+
+                    <div class="col-2 text-center d-flex">
+                        <span class="my-auto me-auto ms-0"><i class="bi bi-chevron-left"></i></span>
+                    </div>
+                    <div class="col-8">
+                        <h3 id="offcanvasRightLabel">{{ article.title }}</h3>
+                        {{ article.source_name }} / {{ article.pub_date }}
+
+                        <div
+                            class="w-100"
+                            :style="[article.image ?  {'background-image': 'url(' + article.image + ')'} : {'background-image': 'url(/img/no_image.png)'}]"
+                        >
+                        </div>
+
+                        
+                    </div>
+                    <div class="col-2 text-center d-flex">
+                        <span class="my-auto me-0 ms-auto"><i class="bi bi-chevron-right"></i></span>
+                    </div>
+
+                </div>
+      
+
         </div>
     </div>
 </template>
+
+<style scoped>
+.offcanvas-end {
+    width: 75vw;
+}
+</style>
 
 <script type="application/javascript">
 

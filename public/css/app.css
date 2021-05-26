@@ -10849,7 +10849,7 @@ body,
 html {
   height: 100%;
   font-family: "Helvetica";
-  letter-spacing: -0.03rem;
+  letter-spacing: -0.04rem;
   line-height: 1.25em;
   color: #212529;
 }
@@ -10867,7 +10867,7 @@ h6,
 .h6,
 .bold {
   font-family: "Helvetica-Bold";
-  letter-spacing: -0.03rem;
+  letter-spacing: -0.04rem;
   line-height: 1.25em;
 }
 
