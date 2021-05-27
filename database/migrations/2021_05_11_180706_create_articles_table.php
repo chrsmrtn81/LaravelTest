@@ -15,7 +15,7 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->timestamps($precision = 0);
             $table->string('source_name');
             $table->foreignId('source_id')->constrained('sources');
             $table->string('title');

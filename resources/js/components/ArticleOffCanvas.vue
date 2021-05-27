@@ -25,6 +25,7 @@
                         <br><br>
 
                         <div v-html="article.content"></div>
+                        
 
                         
                     </div>
@@ -33,7 +34,8 @@
                     </div>
 
                 </div>
-      
+
+
 
         </div>
     </div>
@@ -43,6 +45,7 @@
 .offcanvas-end {
     width: 75vw;
 }
+
 </style>
 
 <script type="application/javascript">
