@@ -21,7 +21,7 @@
                                 <span :class="'article-card__info-meta__views-' + item.id">{{ item.views }}</span> views
                             </div>
                             <div class="article-card__info-meta">
-                                {{ item.short_description }}
+                                {{ item.description }}
                             </div>
                         </div>
                     </div>

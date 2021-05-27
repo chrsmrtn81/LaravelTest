@@ -2046,6 +2046,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ArticleOffCanvas",
   data: function data() {
@@ -2054,7 +2059,8 @@ __webpack_require__.r(__webpack_exports__);
         title: null,
         image: null,
         pub_date: null,
-        source_name: null
+        source_name: null,
+        content: null
       }
     };
   },
@@ -2066,6 +2072,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.article.image = fetchedArticle.data.image;
       _this.article.pub_date = fetchedArticle.data.pub_date;
       _this.article.source_name = fetchedArticle.data.source_name;
+      _this.article.content = fetchedArticle.data.content;
     });
   }
 });
@@ -20199,7 +20206,7 @@ var render = function() {
                       _c("div", { staticClass: "article-card__info-meta" }, [
                         _vm._v(
                           "\n                            " +
-                            _vm._s(item.short_description) +
+                            _vm._s(item.description) +
                             "\n                        "
                         )
                       ])
@@ -20274,8 +20281,11 @@ var render = function() {
                 _vm._s(_vm.article.source_name) +
                 " / " +
                 _vm._s(_vm.article.pub_date) +
-                "\n\n                    "
+                " "
             ),
+            _c("br"),
+            _c("br"),
+            _vm._v(" "),
             _c("div", {
               staticClass: "w-100",
               style: [
@@ -20283,7 +20293,12 @@ var render = function() {
                   ? { "background-image": "url(" + _vm.article.image + ")" }
                   : { "background-image": "url(/img/no_image.png)" }
               ]
-            })
+            }),
+            _vm._v(" "),
+            _c("br"),
+            _c("br"),
+            _vm._v(" "),
+            _c("div", { domProps: { innerHTML: _vm._s(_vm.article.content) } })
           ]),
           _vm._v(" "),
           _vm._m(2)

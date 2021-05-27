@@ -91,14 +91,21 @@ class ProcessRssFeeds extends Controller
 
             if($article_date > $most_recent_article_date){
                 $image = null;
+                $content = null;
                 $categories = [];
+
+                foreach($article->children("content", true) as $k => $v){
+                    if ($k == 'encoded') {
+                        $content = (string) $v;
+                    }
+                }
 
                 foreach ($article->children('media', true) as $k => $v) {
                     $attributes = $v->attributes();
                     
                     if ($k == 'content') {
                         if (property_exists($attributes, 'url')) {
-                            $image = $attributes->url;
+                            $image = (string) $attributes->url;
                         }
                     }
                 }
@@ -111,11 +118,12 @@ class ProcessRssFeeds extends Controller
                     'source_name' => $xml_feed->nice_name,
                     'source_id' => $xml_feed->id,
                     'title' => (string) $article->title,
-                    'short_description' => Str::limit(html_entity_decode(strip_tags(trim((string)$article->description))), 200, $end='...'),
-                    'description' => html_entity_decode(trim((string)$article->description)),
+                    'slug' => Str::slug((string) $article->title, '-'),
+                    'description' => Str::limit(html_entity_decode(strip_tags(trim((string)$article->description))), 200, $end='...'),
+                    'content' => $content,
                     'link' => (string) $article->link,
                     'pub_date' => $article_date,
-                    'image' => (string) $image,
+                    'image' => $image,
                     'categories' => $categories,
                 ];
             }
@@ -135,8 +143,9 @@ class ProcessRssFeeds extends Controller
             $a->source_name = $article['source_name'];
             $a->source_id = $article['source_id'];
             $a->title = $article['title'];
-            $a->short_description = $article['short_description'];
+            $a->slug = $article['slug'];
             $a->description = $article['description'];
+            $a->content = $article['content'];
             $a->link = $article['link'];
             $a->pub_date = $article['pub_date'];
             $a->categories = implode(',', $article['categories']);

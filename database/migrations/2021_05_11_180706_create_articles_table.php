@@ -19,8 +19,9 @@ class CreateArticlesTable extends Migration
             $table->string('source_name');
             $table->foreignId('source_id')->constrained('sources');
             $table->string('title');
-            $table->string('short_description', 600)->nullable();
-            $table->text('description', 2000)->nullable();
+            $table->string('slug');
+            $table->string('description', 250)->nullable();
+            $table->text('content')->nullable();
             $table->string('link');
             $table->datetime('pub_date');
             $table->string('categories');

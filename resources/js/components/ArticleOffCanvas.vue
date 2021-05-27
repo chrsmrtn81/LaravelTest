@@ -13,13 +13,18 @@
                     </div>
                     <div class="col-8">
                         <h3 id="offcanvasRightLabel">{{ article.title }}</h3>
-                        {{ article.source_name }} / {{ article.pub_date }}
+                        {{ article.source_name }} / {{ article.pub_date }} <br><br>
+
 
                         <div
                             class="w-100"
                             :style="[article.image ?  {'background-image': 'url(' + article.image + ')'} : {'background-image': 'url(/img/no_image.png)'}]"
                         >
                         </div>
+
+                        <br><br>
+
+                        <div v-html="article.content"></div>
 
                         
                     </div>
@@ -51,6 +56,7 @@ export default {
                 image: null,
                 pub_date: null,
                 source_name: null,
+                content: null
             }
         };
     },
@@ -60,6 +66,7 @@ export default {
             this.article.image = fetchedArticle.data.image
             this.article.pub_date = fetchedArticle.data.pub_date
             this.article.source_name = fetchedArticle.data.source_name 
+            this.article.content = fetchedArticle.data.content
         })
     }
 };
