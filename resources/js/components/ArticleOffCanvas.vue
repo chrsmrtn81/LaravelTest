@@ -74,7 +74,10 @@ export default {
         })
     },
     updated() {
-        window.twttr = (function(d, s, id) {
+        if(window.twttr){
+            twttr.widgets.load()
+        } else {
+            window.twttr = (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0],
                 t = window.twttr || {};
             if (d.getElementById(id)) return t;
@@ -89,7 +92,8 @@ export default {
             };
 
             return t;
-        }(document, "script", "twitter-wjs"));
+            }(document, "script", "twitter-wjs"));
+        }
     }
 };
 </script>

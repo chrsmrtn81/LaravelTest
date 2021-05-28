@@ -65,11 +65,7 @@
                 <div class="col-10 p-0">
                     @include('partials.nav.navbar')
                     <div class="px-5 mt-5">
-
-                        {{-- <blockquote class="twitter-tweet"><p lang="en" dir="ltr">So if the Wuhan lab leak theory is confirmed to be true, mainstream media &amp; social media censorship helped facilitate one of the biggest cover-ups in modern history.<br><br>All in the name of &quot;stopping misinformation.&quot;<br><br>Why should they be trusted to be the arbiters of truth ever again?</p>&mdash; Paul Joseph Watson (@PrisonPlanet) <a href="https://twitter.com/PrisonPlanet/status/1397983207010746371?ref_src=twsrc%5Etfw">May 27, 2021</a></blockquote> --}}
-                        {{-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> --}}
-                        
-                        
+                                                
                         <article-list-large :articles="{{ $articles }}"></article-list-large>
                         <article-off-canvas></article-list-large>
 
@@ -96,8 +92,5 @@
 </script>
 
 <script src="{{ asset('js/app.js') }}"></script>
-
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 
 </html>
