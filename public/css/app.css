@@ -10974,7 +10974,33 @@ li.article-card__animated {
 }
 
 .twitter-tweet {
+  margin: 10px auto !important;
+}
+
+img {
+  max-width: 100%;
+  margin: 10px auto !important;
+  height: auto;
+}
+
+figure {
+  max-width: 100%;
   margin: 30px auto !important;
+}
+
+iframe {
+  max-width: 100%;
+  margin: 10px auto !important;
+}
+
+video {
+  max-width: 100%;
+  margin: 10px auto !important;
+  height: auto;
+}
+
+.wp-block-spacer {
+  height: 0 !important;
 }
 @font-face {
   font-family: "bootstrap-icons";

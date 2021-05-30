@@ -22,10 +22,10 @@ class CreateArticlesTable extends Migration
             $table->string('slug');
             $table->string('description', 250)->nullable();
             $table->text('content')->nullable();
-            $table->string('link');
+            $table->text('link');
             $table->datetime('pub_date');
             $table->string('categories');
-            $table->string('image', 300)->nullable();
+            $table->text('image')->nullable();
             $table->boolean('active');
         });
     }

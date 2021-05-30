@@ -13,16 +13,15 @@
                     </div>
                     <div class="col-8">
                         <h3 id="offcanvasRightLabel">{{ article.title }}</h3>
-                        {{ article.source_name }} / {{ article.pub_date }} <br><br>
-
-
-                        <div
-                            class="w-100"
-                            :style="[article.image ?  {'background-image': 'url(' + article.image + ')'} : {'background-image': 'url(/img/no_image.png)'}]"
-                        >
+                        <div class="article-card__info-meta mb-4">
+                            {{ article.source_name }} / {{ article.pub_date }}
                         </div>
+                        
 
-                        <br><br>
+
+                        <div class="w-100 mb-4" v-if="article.image">
+                            <img :src="article.image" />
+                        </div>
 
                         <div v-html="article.content"></div>
                         
@@ -46,7 +45,6 @@
 .offcanvas-end {
     width: 75vw;
 }
-
 </style>
 
 <script type="application/javascript">
@@ -74,26 +72,8 @@ export default {
         })
     },
     updated() {
-        if(window.twttr){
-            twttr.widgets.load()
-        } else {
-            window.twttr = (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0],
-                t = window.twttr || {};
-            if (d.getElementById(id)) return t;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://platform.twitter.com/widgets.js";
-            fjs.parentNode.insertBefore(js, fjs);
+        twttr.widgets.load()
 
-            t._e = [];
-            t.ready = function(f) {
-                t._e.push(f);
-            };
-
-            return t;
-            }(document, "script", "twitter-wjs"));
-        }
     }
 };
 </script>

@@ -2053,8 +2053,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ArticleOffCanvas",
   data: function data() {
@@ -2080,27 +2078,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   updated: function updated() {
-    if (window.twttr) {
-      twttr.widgets.load();
-    } else {
-      window.twttr = function (d, s, id) {
-        var js,
-            fjs = d.getElementsByTagName(s)[0],
-            t = window.twttr || {};
-        if (d.getElementById(id)) return t;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://platform.twitter.com/widgets.js";
-        fjs.parentNode.insertBefore(js, fjs);
-        t._e = [];
-
-        t.ready = function (f) {
-          t._e.push(f);
-        };
-
-        return t;
-      }(document, "script", "twitter-wjs");
-    }
+    twttr.widgets.load();
   }
 });
 
@@ -2224,6 +2202,24 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
 window.VueEvent = new Vue();
+
+window.twttr = function (d, s, id) {
+  var js,
+      fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+  t._e = [];
+
+  t.ready = function (f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -2231,6 +2227,7 @@ window.VueEvent = new Vue();
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
+
 
 var files = __webpack_require__("./resources/js/components sync recursive \\.vue$/");
 
@@ -2298,7 +2295,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.offcanvas-end[data-v-6031ed88] {\r\n    width: 75vw;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.offcanvas-end[data-v-6031ed88] {\r\n    width: 75vw;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20303,27 +20300,22 @@ var render = function() {
             _c("h3", { attrs: { id: "offcanvasRightLabel" } }, [
               _vm._v(_vm._s(_vm.article.title))
             ]),
-            _vm._v(
-              "\n                    " +
-                _vm._s(_vm.article.source_name) +
-                " / " +
-                _vm._s(_vm.article.pub_date) +
-                " "
-            ),
-            _c("br"),
-            _c("br"),
             _vm._v(" "),
-            _c("div", {
-              staticClass: "w-100",
-              style: [
-                _vm.article.image
-                  ? { "background-image": "url(" + _vm.article.image + ")" }
-                  : { "background-image": "url(/img/no_image.png)" }
-              ]
-            }),
+            _c("div", { staticClass: "article-card__info-meta mb-4" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(_vm.article.source_name) +
+                  " / " +
+                  _vm._s(_vm.article.pub_date) +
+                  "\n                    "
+              )
+            ]),
             _vm._v(" "),
-            _c("br"),
-            _c("br"),
+            _vm.article.image
+              ? _c("div", { staticClass: "w-100 mb-4" }, [
+                  _c("img", { attrs: { src: _vm.article.image } })
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c("div", { domProps: { innerHTML: _vm._s(_vm.article.content) } })
           ]),

@@ -78,11 +78,7 @@ class ProcessRssFeeds extends Controller
         // }
 
         foreach($xml_data->channel->item as $article) {
-            $article_date = str_replace('/', '-', (string) $article->pubDate);
-            $article_date = str_replace(' - ', ' ', (string) $article->pubDate);
-            $article_date = strtotime($article_date);
-            $article_date = Carbon::createFromTimestamp($article_date)->format('Y-m-d H:i:s');
-
+            $article_date = $this->formatArticleDate((string) $article->pubDate);
             $most_recent_article_date = 0;
 
             if(isset($this->most_recent_article_dates[$xml_feed->id])){
@@ -102,12 +98,15 @@ class ProcessRssFeeds extends Controller
 
                 foreach ($article->children('media', true) as $k => $v) {
                     $attributes = $v->attributes();
-                    
                     if ($k == 'content') {
                         if (property_exists($attributes, 'url')) {
                             $image = (string) $attributes->url;
-                        }
+                        } 
                     }
+                }
+
+                if(!$image && $content){
+                    $image = $this->getPhotoFromContent($content);
                 }
 
                 foreach ((array) $article->category as $category){
@@ -155,4 +154,32 @@ class ProcessRssFeeds extends Controller
             $a->save();
         }
     }
+
+    private function formatArticleDate($article_date)
+    {
+        $date = str_replace('/', '-', $article_date);
+        $date = str_replace(' - ', ' ', $article_date);
+        $date = strtotime($date);
+        $date = Carbon::createFromTimestamp($date)->format('Y-m-d H:i:s');
+
+        return $date;
+    }
+
+    private function getPhotoFromContent($content){
+        if($content){
+            try{
+                $doc = new \DOMDocument();
+                $doc->loadHTML($content);
+                $xpath = new \DOMXPath($doc);
+                $result = $xpath->evaluate("string(//img/@src)"); # "/images/image.jpg"
+            } catch(\Exception $e) {
+                return NULL;
+            }
+                
+            return $result;
+        }
+
+        return NULL;
+    }
 }
+

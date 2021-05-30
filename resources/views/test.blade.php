@@ -30,12 +30,47 @@
 <body>
 
 
+    
+
+
+
+
+
+
+        <script>
+          function onResize(e) {
+            if(e.data.type !== 'height') return;
+            if(e.origin !== "https://americasvoice.news") return;
+            document.getElementById('rav-embed-1622258216000').style.height = e.data.height + 'px';
+          }
+          window.addEventListener('message', onResize);
+          
+        </script> 
+        <iframe id="rav-embed-1622258216000" style="width: 100%" src="https://americasvoice.news/embed/news/us-says-iranians-should-be-free-choose-own-leaders/" frameborder="0" scrolling="no"></iframe>
+
+
+<script>
+    function iframeLoaded() {
+      var iFrameID = document.getElementById('rav-embed-1622258216000');
+      if(iFrameID) {
+            // here you can make the height, I delete it first, then I make it again
+            iFrameID.height = "";
+            iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
+      }   
+  }
+</script>
+        
+        
+:style="[article.image ?  {'background-image': 'url(' + article.image + ')'} : {'background-image': 'url(/img/no_image.png)'}]"
+
     <div class="container"></div>
+
+    
 
 
 </body>
 
-<script>
+{{-- <script>
 
     const container = document.querySelector('.container')
 
@@ -80,7 +115,7 @@
         
     })
 
-</script>
+</script> --}}
 
 
 <script src="{{ asset('js/app.js') }}"></script>
